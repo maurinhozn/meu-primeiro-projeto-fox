@@ -1,12 +1,170 @@
-<!DOCTYPE html>
+﻿<!doctype html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Meu Primeiro Projeto</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Surpresa Mauro</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      overflow: hidden;
+      font-family: Arial, Helvetica, sans-serif;
+      background: radial-gradient(circle at top, #fff7ad, #ff7ab6 35%, #6c63ff 70%, #111827);
+      color: white;
+      display: grid;
+      place-items: center;
+    }
+
+    .card {
+      width: min(92vw, 900px);
+      min-height: 70vh;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 32px;
+      border-radius: 32px;
+      background: rgba(255, 255, 255, 0.14);
+      border: 3px solid rgba(255, 255, 255, 0.45);
+      box-shadow: 0 30px 100px rgba(0, 0, 0, 0.35);
+      backdrop-filter: blur(10px);
+      position: relative;
+      z-index: 2;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(48px, 10vw, 120px);
+      line-height: 0.95;
+      text-transform: uppercase;
+      text-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+    }
+
+    h2 {
+      margin: 22px 0 0;
+      font-size: clamp(32px, 6vw, 76px);
+      line-height: 1;
+      color: #fff7ad;
+      text-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+    }
+
+    button {
+      margin-top: 36px;
+      border: 0;
+      border-radius: 999px;
+      padding: 18px 28px;
+      font-size: 22px;
+      font-weight: 800;
+      cursor: pointer;
+      color: #111827;
+      background: #fff7ad;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+    }
+
+    .confetti {
+      position: fixed;
+      top: -20px;
+      width: 12px;
+      height: 18px;
+      opacity: 0.95;
+      animation: fall linear forwards;
+      z-index: 1;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(110vh) rotate(720deg);
+      }
+    }
+
+    .firework {
+      position: fixed;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      z-index: 1;
+      animation: boom 900ms ease-out forwards;
+    }
+
+    @keyframes boom {
+      from {
+        transform: scale(0.2);
+        opacity: 1;
+        box-shadow:
+          0 0 #fff,
+          0 0 #fff,
+          0 0 #fff,
+          0 0 #fff,
+          0 0 #fff,
+          0 0 #fff,
+          0 0 #fff,
+          0 0 #fff;
+      }
+      to {
+        transform: scale(1);
+        opacity: 0;
+        box-shadow:
+          70px 0 #fff7ad,
+          -70px 0 #ff4d8d,
+          0 70px #42e2b8,
+          0 -70px #7dd3fc,
+          50px 50px #ffffff,
+          -50px 50px #facc15,
+          50px -50px #fb7185,
+          -50px -50px #a78bfa;
+      }
+    }
+  </style>
 </head>
 <body>
-  <h1>Olá, GitHub! 🚀</h1>
-  <p>Este é o meu primeiro projeto.</p>
+  <main class="card">
+    <section>
+      <h1>PARABENS MAURO</h1>
+      <h2>rumos a Limenira</h2>
+      <button onclick="celebrar()">Clique para comemorar</button>
+    </section>
+  </main>
+
+  <script>
+    const cores = ['#fff7ad', '#ff4d8d', '#42e2b8', '#7dd3fc', '#facc15', '#ffffff', '#a78bfa'];
+
+    function confete() {
+      const item = document.createElement('div');
+      item.className = 'confetti';
+      item.style.left = Math.random() * 100 + 'vw';
+      item.style.background = cores[Math.floor(Math.random() * cores.length)];
+      item.style.animationDuration = 2 + Math.random() * 3 + 's';
+      item.style.transform = 'rotate(' + Math.random() * 360 + 'deg)';
+      document.body.appendChild(item);
+      setTimeout(() => item.remove(), 5200);
+    }
+
+    function fogo() {
+      const item = document.createElement('div');
+      item.className = 'firework';
+      item.style.left = 10 + Math.random() * 80 + 'vw';
+      item.style.top = 10 + Math.random() * 55 + 'vh';
+      item.style.background = cores[Math.floor(Math.random() * cores.length)];
+      document.body.appendChild(item);
+      setTimeout(() => item.remove(), 950);
+    }
+
+    function celebrar() {
+      for (let i = 0; i < 140; i++) {
+        setTimeout(confete, i * 12);
+      }
+
+      for (let i = 0; i < 18; i++) {
+        setTimeout(fogo, i * 140);
+      }
+    }
+
+    setInterval(confete, 180);
+    setInterval(fogo, 900);
+  </script>
 </body>
 </html>
